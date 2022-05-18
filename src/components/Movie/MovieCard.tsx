@@ -23,16 +23,20 @@ export const MovieCard: React.FC<IMovieCardProps> = (props: IMovieCardProps) => 
 
   return (
 
-    <motion.div animate={{ y: 100 }} layout className="movies">
-      {filteredDataMovie.map((item, key) => {
-        return (
-          <motion.div layout key={key}>
-            <h2>{item.title}</h2>
-            <img onError={addDefaultSrc} src={item.posterUrl} alt="Movie" />
-          </motion.div>
-        )
-      })
-      }
+
+
+    <motion.div animate={{ y: 100 }} layout className={`${filteredDataMovie.length === 0 ? '' : 'movies'}`}>
+      {filteredDataMovie.length === 0 ?
+        <h1>No Movies Listed In That Category</h1> :
+        filteredDataMovie.map((item, key) => {
+          return (
+            <motion.div layout key={key}>
+              <h2>{item.title}</h2>
+              <img onError={addDefaultSrc} src={item.posterUrl} alt="Movie" />
+            </motion.div>
+          )
+        })}
+
 
     </motion.div>
   );
