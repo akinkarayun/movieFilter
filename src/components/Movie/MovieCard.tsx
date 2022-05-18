@@ -1,6 +1,6 @@
 import React from 'react'
 import { IMovie } from '../../modal/modal';
-import motion from 'motion';
+import { motion } from 'framer-motion';
 
 interface IMovieCardProps {
   data: IMovie[];
@@ -9,9 +9,6 @@ interface IMovieCardProps {
 }
 
 export const MovieCard: React.FC<IMovieCardProps> = (props: IMovieCardProps) => {
-  // const filteredData = props.data.includes(() => {
-  //   return item.genres.includes(props.activeGenre)
-  // })
   const [filteredDataMovie, setFilteredValues] = React.useState(props.data as IMovie[])
 
   React.useEffect(() => {
@@ -26,17 +23,17 @@ export const MovieCard: React.FC<IMovieCardProps> = (props: IMovieCardProps) => 
 
   return (
 
-    <div className="movies">
+    <motion.div animate={{ y: 100 }} layout className="movies">
       {filteredDataMovie.map((item, key) => {
         return (
-          <div key={key}>
+          <motion.div layout key={key}>
             <h2>{item.title}</h2>
             <img onError={addDefaultSrc} src={item.posterUrl} alt="Movie" />
-          </div>
+          </motion.div>
         )
       })
       }
 
-    </div>
+    </motion.div>
   );
 }
